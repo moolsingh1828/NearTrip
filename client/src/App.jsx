@@ -6,6 +6,7 @@ import HiddenGems from './pages/HiddenGems.jsx';
 import SharedPlace from './pages/SharedPlace.jsx';
 import About from './pages/About.jsx';
 import './styles.css';
+import './polish.css';
 
 export default function App() {
   return <BrowserRouter><Routes>
