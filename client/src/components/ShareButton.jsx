@@ -8,7 +8,7 @@ export default function ShareButton({ place }) {
       setStatus('Preparing…');
       const { slug } = await api.share(place);
       const url = `${window.location.origin}/shared/${slug}`;
-      if (navigator.share) await navigator.share({ title: place.name, text: `Check out ${place.name} on Roamly`, url });
+      if (navigator.share) await navigator.share({ title: place.name, text: `Check out ${place.name} on nearTrip`, url });
       else { await navigator.clipboard.writeText(url); setStatus('Link copied'); }
       setStatus('Shared');
     } catch (e) { setStatus(e.message); }

@@ -12,7 +12,7 @@ const app = express();
 app.use(cors({ origin: env.clientUrl === '*' ? true : env.clientUrl }));
 app.use(express.json({ limit: '1mb' }));
 
-app.get('/api/health', (req, res) => res.json({ ok: true, service: 'roamly-api', time: new Date().toISOString() }));
+app.get('/api/health', (req, res) => res.json({ ok: true, service: 'neartrip-api', time: new Date().toISOString() }));
 app.use('/api/places', placeRoutes);
 app.use('/api/routes', routeRoutes);
 app.use('/api/recommendations', recommendationRoutes);
@@ -21,4 +21,4 @@ app.use(notFound);
 app.use(errorHandler);
 
 await connectDb();
-app.listen(env.port, () => console.log(`[server] Roamly API running at http://localhost:${env.port}`));
+app.listen(env.port, () => console.log(`[server] nearTrip API running at http://localhost:${env.port}`));

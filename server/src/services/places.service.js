@@ -72,7 +72,7 @@ export async function findNearbyPlaces({ lat, lng, radius = 6000, category = 'al
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded; charset=UTF-8',
-        'User-Agent': 'Roamly/1.0 (hackathon project; contact: team-roamly@example.com)'
+        'User-Agent': 'nearTrip/1.0 (hackathon project; contact: team-neartrip@example.com)'
       },
       body: new URLSearchParams({ data: query })
     });
@@ -83,7 +83,7 @@ export async function findNearbyPlaces({ lat, lng, radius = 6000, category = 'al
     return unique.sort((a, b) => (a.distanceKm ?? 999) - (b.distanceKm ?? 999)).slice(0, 80);
   } catch (error) {
     console.warn('[places] external provider failed:', error.message);
-    return FALLBACK_PLACES.map((p) => ({ ...p, distanceKm: Number(haversineKm(lat, lng, p.lat, p.lng).toFixed(1)), source: 'Roamly demo fallback' }))
+    return FALLBACK_PLACES.map((p) => ({ ...p, distanceKm: Number(haversineKm(lat, lng, p.lat, p.lng).toFixed(1)), source: 'nearTrip demo fallback' }))
       .filter((p) => category === 'all' || p.category === category || (category === 'hidden' && p.isHiddenGem));
   }
 }

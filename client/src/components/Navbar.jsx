@@ -4,9 +4,9 @@ export default function Navbar() {
   return (
     <header className="nav-shell">
       <div className="nav">
-        <Link to="/" className="brand" aria-label="Roamly home">
+        <Link to="/" className="brand" aria-label="nearTrip home">
           <span className="brand-mark">✦</span>
-          <span className="brand-name">roamly</span>
+          <span className="brand-name">nearTrip</span>
           <span className="brand-badge">nearby</span>
         </Link>
         <nav aria-label="Primary navigation">

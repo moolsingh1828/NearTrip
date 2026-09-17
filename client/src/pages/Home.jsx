@@ -7,7 +7,7 @@ export default function Home() {
       <div className="hero-copy">
         <div className="hero-badge"><span className="live-dot" /> LOCAL DISCOVERY, SIMPLIFIED</div>
         <h1>Find your next <em>good plan</em> nearby.</h1>
-        <p>Open Roamly, share your location, and instantly discover nearby places worth visiting — from quiet lakes and cafés to attractions and hidden gems.</p>
+        <p>Open nearTrip, share your location, and instantly discover nearby places worth visiting — from quiet lakes and cafés to attractions and hidden gems.</p>
         <div className="hero-actions">
           <Link to="/explore" className="button primary">Explore nearby <span>→</span></Link>
           <Link to="/hidden-gems" className="button ghost">Find hidden gems</Link>

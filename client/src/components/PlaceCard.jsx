@@ -14,7 +14,7 @@ export default function PlaceCard({ place, onSelect }) {
   const tags = [...new Set([...(place.tags || []), place.category])].filter(Boolean).slice(0, 3);
 
   return (
-    <article className="place-card" onClick={() => { sessionStorage.setItem(`roamly:place:${place.id}`, JSON.stringify(place)); onSelect?.(place); }}>
+    <article className="place-card" onClick={() => { sessionStorage.setItem(`neartrip:place:${place.id}`, JSON.stringify(place)); onSelect?.(place); }}>
       <div className={`place-image place-image-${place.category || 'other'}`}>
         <div className="place-image-pattern" />
         <span className="place-category-icon">{meta.icon}</span>

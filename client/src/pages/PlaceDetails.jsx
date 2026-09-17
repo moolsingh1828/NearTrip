@@ -12,7 +12,7 @@ export default function PlaceDetails() {
   const navigate = useNavigate();
   const [place, setPlace] = useState(() => {
     if (routeState.state?.place) return routeState.state.place;
-    try { return JSON.parse(sessionStorage.getItem(`roamly:place:${decodeURIComponent(id)}`) || 'null'); } catch { return null; }
+    try { return JSON.parse(sessionStorage.getItem(`neartrip:place:${decodeURIComponent(id)}`) || 'null'); } catch { return null; }
   });
   const [route, setRoute] = useState(null);
   const [routeLoading, setRouteLoading] = useState(false);
@@ -35,6 +35,6 @@ export default function PlaceDetails() {
   return <div className="app-shell"><Navbar /><main className="container detail-page">
     <Link to="/explore" className="back-link">← Back to explore</Link>
     <section className="detail-hero"><div className="detail-image"><span className="badge">{place.isHiddenGem ? '✨ Hidden Gem' : 'Nearby pick'}</span></div><div className="detail-copy"><span className="eyebrow">{place.category?.toUpperCase()}</span><h1>{place.name}</h1><div className="detail-stats"><span>★ {place.rating || 'New'}</span><span>📍 {place.distanceKm ?? '—'} km</span><span>💸 {place.estimatedCost || 'Varies'}</span></div><p>{place.description}</p><div className="detail-actions"><button className="button primary" onClick={getRoute}>{routeLoading ? 'Finding route…' : '🗺️ View route'}</button><ShareButton place={place} /></div></div></section>
-    <section className="detail-grid"><div className="info-card"><h2>Before you go</h2><div className="info-row"><span>🕐 Best time</span><strong>{place.bestTime || 'Check locally'}</strong></div><div className="info-row"><span>🎯 Good for</span><strong>{(place.tags || []).filter(Boolean).join(' · ') || 'Exploring'}</strong></div><div className="info-row"><span>🌐 Source</span><strong>{place.source || 'Roamly'}</strong></div></div><div className="route-card"><div className="route-head"><div><span className="eyebrow">ROUTE</span><h2>{route ? `${route.distanceKm} km · ${route.durationMin} min` : 'Ready when you are'}</h2></div></div>{location && <MapView location={location} places={[place]} selected={place} route={route} />}{route?.steps?.length > 0 && <div className="steps">{route.steps.slice(0, 5).map((s, i) => <div key={i}><span>{i + 1}</span>{s.instruction} · {s.distanceM}m</div>)}</div>}</div></section>
+    <section className="detail-grid"><div className="info-card"><h2>Before you go</h2><div className="info-row"><span>🕐 Best time</span><strong>{place.bestTime || 'Check locally'}</strong></div><div className="info-row"><span>🎯 Good for</span><strong>{(place.tags || []).filter(Boolean).join(' · ') || 'Exploring'}</strong></div><div className="info-row"><span>🌐 Source</span><strong>{place.source || 'nearTrip'}</strong></div></div><div className="route-card"><div className="route-head"><div><span className="eyebrow">ROUTE</span><h2>{route ? `${route.distanceKm} km · ${route.durationMin} min` : 'Ready when you are'}</h2></div></div>{location && <MapView location={location} places={[place]} selected={place} route={route} />}{route?.steps?.length > 0 && <div className="steps">{route.steps.slice(0, 5).map((s, i) => <div key={i}><span>{i + 1}</span>{s.instruction} · {s.distanceM}m</div>)}</div>}</div></section>
   </main></div>;
 }
