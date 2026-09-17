@@ -1,0 +1,42 @@
+services:
+  mongo:
+    image: mongo:8
+    restart: unless-stopped
+    ports:
+      - "27017:27017"
+    volumes:
+      - roamly-mongo:/data/db
+
+  server:
+    build: ./server
+    restart: unless-stopped
+    environment:
+      PORT: 5000
+      CLIENT_URL: http://localhost:5173
+      MONGODB_URI: mongodb://mongo:27017/roamly
+      OVERPASS_URL: https://overpass-api.de/api/interpreter
+      OSRM_URL: https://router.project-osrm.org
+      AWS_REGION: ${AWS_REGION:-us-east-1}
+      BEDROCK_MODEL_ID: ${BEDROCK_MODEL_ID:-}
+      AWS_ACCESS_KEY_ID: ${AWS_ACCESS_KEY_ID:-}
+      AWS_SECRET_ACCESS_KEY: ${AWS_SECRET_ACCESS_KEY:-}
+    depends_on:
+      - mongo
+    ports:
+      - "5000:5000"
+
+  client:
+    build:
+      context: ./client
+      args:
+        VITE_API_URL: http://localhost:5000/api
+        VITE_DEFAULT_LAT: 23.2599
+        VITE_DEFAULT_LNG: 77.4126
+        VITE_DEFAULT_CITY: Bhopal
+    depends_on:
+      - server
+    ports:
+      - "5173:80"
+
+volumes:
+  roamly-mongo:
